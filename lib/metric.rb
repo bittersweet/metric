@@ -1,6 +1,7 @@
 require 'metric/version'
 require 'metric/configuration'
 require 'open-uri'
+require 'cgi'
 
 module Metric
   class << self
@@ -13,9 +14,12 @@ module Metric
 
     def track(metric)
       key = "?api_key=" + Metric.configuration.api_key
-      metric = "&metric=#{metric}"
-      url = Metric.configuration.metric_host + '/track.js' + key + metric
+      url = Metric.configuration.metric_host + '/track.js' + key + parse_metric(metric)
       open(url).read
+    end
+
+    def parse_metric(metric)
+    "&metric=#{CGI.escape(metric)}"
     end
   end
 end
