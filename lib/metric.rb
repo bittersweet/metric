@@ -14,7 +14,7 @@ module Metric
     def track(metric)
       key = "?api_key=" + Metric.configuration.api_key
       metric = "&metric=#{metric}"
-      url = "http://metric.io/track.js" + key + metric
+      url = Metric.configuration.metric_host + '/track.js' + key + metric
       open(url).read
     end
   end
