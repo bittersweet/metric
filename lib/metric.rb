@@ -1,4 +1,3 @@
-require 'metric/version'
 require 'metric/configuration'
 require 'open-uri'
 require 'cgi'

@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), "../lib", "metric")
+require File.expand_path('../../lib/metric', __FILE__)
 require 'ruby-debug'
 require 'webmock/rspec'
 
