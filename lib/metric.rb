@@ -11,9 +11,12 @@ module Metric
       yield(configuration)
     end
 
-    def track(metric)
+    def track(metric, trigger = false)
       key = "?api_key=" + Metric.configuration.api_key
-      url = Metric.configuration.metric_host + '/track.js' + key + parse_metric(metric)
+      url = Metric.configuration.metric_host + '/track.js'
+      url << key
+      url << parse_metric(metric)
+      url << "&trigger=1" if trigger
       open(url).read
     end
 
