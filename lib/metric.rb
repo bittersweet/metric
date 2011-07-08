@@ -17,7 +17,9 @@ module Metric
       url << key
       url << parse_metric(metric)
       url << "&trigger=1" if trigger
-      open(url).read
+      Thread.new do
+        `curl "#{url}" 2>&1 ; `
+      end
     end
 
     def parse_metric(metric)
