@@ -12,6 +12,8 @@ module Metric
     end
 
     def track(metric, trigger = false)
+      return if defined?(Rails) && !Rails.env.production?
+
       key = "?api_key=" + Metric.configuration.api_key
       url = Metric.configuration.metric_host + '/track.js'
       url << key
