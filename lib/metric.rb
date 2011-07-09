@@ -11,14 +11,21 @@ module Metric
       yield(configuration)
     end
 
-    def track(metric, trigger = false)
-      return if defined?(Rails) && !Rails.env.production?
+    def compose(metric, options = {})
+      trigger = options[:trigger]
 
       key = "?api_key=" + Metric.configuration.api_key
       url = Metric.configuration.metric_host + '/track.js'
       url << key
       url << parse_metric(metric)
       url << "&trigger=1" if trigger
+      url
+    end
+
+    def track(metric, options = {})
+      return if defined?(Rails) && !Rails.env.production?
+
+      url = compose(metric, options)
       Thread.new do
         `curl "#{url}" 2>&1 ; `
       end

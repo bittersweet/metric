@@ -5,11 +5,13 @@ describe Metric do
     reset_config
   end
 
-  it "calls metric.io" do
-    stub_request(:get, "http://metric.io/track.js").
-      with(:query => {"api_key" => "spec", "metric" => "hits"}).
-      to_return(:status => 200, :body => "{\"total\":1}", :headers => {})
-    Metric.track("hits").should == "{\"total\":1}"
+  it "composes the request url" do
+    Metric.compose("hits").should == "http://metric.io/track.js?api_key=spec&metric=hits"
+  end
+
+  it "gets correct url when tracking" do
+    Metric.should_receive(:compose).with("hits", {})
+    Metric.track("hits")
   end
 
   it "encodes the request url" do
@@ -17,10 +19,8 @@ describe Metric do
   end
 
   it "sends trigger param" do
-    stub_request(:get, "http://metric.io/track.js").
-      with(:query => {"api_key" => "spec", "metric" => "hits", "trigger" => "1"}).
-      to_return(:status => 200, :body => "{\"total\":1}", :headers => {})
-    Metric.track("hits", true).should == "{\"total\":1}"
+    url = "http://metric.io/track.js?api_key=spec&metric=hits&trigger=1"
+    Metric.compose("hits", {:trigger => true}).should == url
   end
 end
 
