@@ -22,5 +22,10 @@ describe Metric do
     url = "http://metric.io/track.js?api_key=spec&metric=hits&trigger=1"
     Metric.compose("hits", {:trigger => true}).should == url
   end
+
+  it "sends custom amount" do
+    url = "http://metric.io/track.js?api_key=spec&metric=hits&amount=42"
+    Metric.compose("hits", {:amount => 42}).should == url
+  end
 end
 

@@ -12,12 +12,14 @@ module Metric
     end
 
     def compose(metric, options = {})
+      amount = options[:amount]
       trigger = options[:trigger]
 
       key = "?api_key=" + Metric.configuration.api_key
       url = Metric.configuration.metric_host + '/track.js'
       url << key
       url << parse_metric(metric)
+      url << "&amount=#{amount}" if amount
       url << "&trigger=1" if trigger
       url
     end
