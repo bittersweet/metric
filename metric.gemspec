@@ -18,6 +18,5 @@ Gem::Specification.new do |gem|
   # Tests
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'webmock'
-  gem.add_development_dependency 'ruby-debug'
 end
 
