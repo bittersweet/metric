@@ -5,7 +5,7 @@ describe Metric::Configuration do
     Metric.configure do |config|
       config.api_key = "test"
     end
-    Metric.configuration.metric_host.should == "http://metric.io"
+    Metric.configuration.metric_host.should == "http://track.metric.io"
   end
 
   it "configures api_key" do

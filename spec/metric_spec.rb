@@ -6,7 +6,7 @@ describe Metric do
   end
 
   it "composes the request url" do
-    Metric.compose("hits").should == "http://metric.io/track.js?api_key=spec&metric=hits"
+    Metric.compose("hits").should == "http://track.metric.io/track.js?api_key=spec&metric=hits"
   end
 
   it "gets correct url when tracking" do
@@ -19,12 +19,12 @@ describe Metric do
   end
 
   it "sends trigger param" do
-    url = "http://metric.io/track.js?api_key=spec&metric=hits&trigger=1"
+    url = "http://track.metric.io/track.js?api_key=spec&metric=hits&trigger=1"
     Metric.compose("hits", {:trigger => true}).should == url
   end
 
   it "sends custom amount" do
-    url = "http://metric.io/track.js?api_key=spec&metric=hits&amount=42"
+    url = "http://track.metric.io/track.js?api_key=spec&metric=hits&amount=42"
     Metric.compose("hits", {:amount => 42}).should == url
   end
 end
