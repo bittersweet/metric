@@ -16,7 +16,7 @@ module Metric
       trigger = options[:trigger]
 
       key = "?api_key=" + Metric.configuration.api_key
-      url = Metric.configuration.metric_host + '/track.js'
+      url = Metric.configuration.metric_host + '/track'
       url << key
       url << parse_metric(metric)
       url << "&amount=#{amount}" if amount

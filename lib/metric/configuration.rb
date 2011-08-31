@@ -6,7 +6,7 @@ module Metric
     attr_accessor :metric_host
 
     def initialize
-      @metric_host = "http://track.metric.io"
+      @metric_host = "http://api.metric.io"
     end
   end
 end
