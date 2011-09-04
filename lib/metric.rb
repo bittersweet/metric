@@ -1,4 +1,5 @@
 require 'metric/configuration'
+require 'metric/track'
 require 'open-uri'
 require 'cgi'
 
@@ -11,31 +12,8 @@ module Metric
       yield(configuration)
     end
 
-    def compose(metric, options = {})
-      amount = options[:amount]
-      trigger = options[:trigger]
-
-      key = "?api_key=" + Metric.configuration.api_key
-      url = Metric.configuration.metric_host + '/track'
-      url << key
-      url << parse_metric(metric)
-      url << "&amount=#{amount}" if amount
-      url << "&trigger=1" if trigger
-      url
-    end
-
     def track(metric, options = {})
-      return if defined?(Rails) && !Rails.env.production?
-      return if options[:amount] && options[:amount] == 0
-
-      url = compose(metric, options)
-      Thread.new do
-        `curl "#{url}" 2>&1 ; `
-      end
-    end
-
-    def parse_metric(metric)
-    "&metric=#{CGI.escape(metric)}"
+      Metric::Track.track(metric, options)
     end
   end
 end
