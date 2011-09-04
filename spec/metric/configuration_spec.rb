@@ -21,4 +21,11 @@ describe Metric::Configuration do
     end
     Metric.configuration.metric_host.should == "http://localhost:5000"
   end
+
+  it "configures secret token" do
+    Metric.configure do |config|
+      config.secret_token = "random_string"
+    end
+    Metric.configuration.secret_token.should == "random_string"
+  end
 end
