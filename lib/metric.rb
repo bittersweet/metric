@@ -1,7 +1,9 @@
 require 'metric/configuration'
 require 'metric/track'
+require 'metric/receive'
 require 'open-uri'
 require 'cgi'
+require 'faraday'
 
 module Metric
   class << self
