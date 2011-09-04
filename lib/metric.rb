@@ -26,6 +26,7 @@ module Metric
 
     def track(metric, options = {})
       return if defined?(Rails) && !Rails.env.production?
+      return if options[:amount] && options[:amount] == 0
 
       url = compose(metric, options)
       Thread.new do

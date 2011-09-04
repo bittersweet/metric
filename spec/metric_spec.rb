@@ -27,5 +27,9 @@ describe Metric do
     url = "http://api.metric.io/track?api_key=spec&metric=hits&amount=42"
     Metric.compose("hits", {:amount => 42}).should == url
   end
+
+  it "does nothing if amount is 0" do
+    Metric.track("hits", {:amount => 0}).should == nil
+  end
 end
 
