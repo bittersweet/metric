@@ -1,5 +1,5 @@
 require 'digest/md5'
-require 'json'
+require 'multi_json'
 
 module Metric
   class Receive
@@ -25,7 +25,7 @@ module Metric
     def self.receive(metric, range)
       url = compose(metric, range)
       response = connection.get(url)
-      JSON.parse(response.body)
+      MultiJson.decode(response.body)
     end
 
     def self.parse_metric(metric)

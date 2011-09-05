@@ -3,7 +3,7 @@ PATH
   specs:
     metric (0.0.5)
       faraday
-      json
+      multi_json
 
 GEM
   remote: http://rubygems.org/
@@ -17,11 +17,11 @@ GEM
       addressable (~> 2.2.6)
       multipart-post (~> 1.1.0)
       rack (>= 1.1.0, < 2)
-    json (1.5.3)
     linecache (0.46)
       rbx-require-relative (> 0.0.4)
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
+    multi_json (1.0.3)
     multipart-post (1.1.3)
     rack (1.3.2)
     rbx-require-relative (0.0.5)
@@ -57,9 +57,9 @@ PLATFORMS
 
 DEPENDENCIES
   faraday
-  json
   linecache19
   metric!
+  multi_json
   rspec
   ruby-debug
   ruby-debug19

@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.version       = Metric::VERSION
 
   gem.add_runtime_dependency 'faraday'
-  gem.add_runtime_dependency 'json'
+  gem.add_runtime_dependency 'multi_json'
 
   # Tests
   gem.add_development_dependency 'rspec'
