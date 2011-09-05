@@ -4,7 +4,7 @@ describe Metric::Receive do
   before do
     reset_config
     Metric.configure do |config|
-      config.secret_token = "1234"
+      config.secret_key = "1234"
     end
   end
 

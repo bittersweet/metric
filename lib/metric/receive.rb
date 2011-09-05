@@ -4,7 +4,7 @@ require 'json'
 module Metric
   class Receive
     def self.generate_token(metric)
-      Digest::MD5.hexdigest(Metric.configuration.secret_token + metric)
+      Digest::MD5.hexdigest(Metric.configuration.secret_key + metric)
     end
 
     def self.compose(metric, range)

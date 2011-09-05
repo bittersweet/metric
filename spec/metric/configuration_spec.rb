@@ -24,8 +24,8 @@ describe Metric::Configuration do
 
   it "configures secret token" do
     Metric.configure do |config|
-      config.secret_token = "random_string"
+      config.secret_key = "random_string"
     end
-    Metric.configuration.secret_token.should == "random_string"
+    Metric.configuration.secret_key.should == "random_string"
   end
 end

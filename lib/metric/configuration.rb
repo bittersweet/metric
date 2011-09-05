@@ -6,7 +6,7 @@ module Metric
     attr_accessor :metric_host
 
     # Used to generate a hash for getting data out
-    attr_accessor :secret_token
+    attr_accessor :secret_key
 
     def initialize
       @metric_host = "http://api.metric.io"
