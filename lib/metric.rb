@@ -19,7 +19,7 @@ module Metric
     end
 
     def receive(metric, range)
-      Metric::Receive.receive(metric, options)
+      Metric::Receive.receive(metric, range)
     end
   end
 end
