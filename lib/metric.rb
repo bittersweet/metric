@@ -17,6 +17,10 @@ module Metric
     def track(metric, options = {})
       Metric::Track.track(metric, options)
     end
+
+    def receive(metric, range)
+      Metric::Receive.receive(metric, options)
+    end
   end
 end
 
