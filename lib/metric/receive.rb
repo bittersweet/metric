@@ -22,8 +22,8 @@ module Metric
       end
     end
 
-    def self.receive(metric, range)
-      url = compose(metric, range)
+    def self.receive(metric, options = {})
+      url = compose(metric, options)
       response = connection.get(url)
       JSON.parse(response.body)
     end
