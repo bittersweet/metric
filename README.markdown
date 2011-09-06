@@ -1,4 +1,4 @@
-# Metric
+# Metric [![Build Status](http://travis-ci.org/bittersweet/metric.png)](http://travis-ci.org/bittersweet/metric)
 
 Track simple metrics via [metric.io](metric.io).
 
