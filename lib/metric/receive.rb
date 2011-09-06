@@ -1,4 +1,5 @@
 require 'digest/md5'
+require 'faraday'
 require 'multi_json'
 
 module Metric
