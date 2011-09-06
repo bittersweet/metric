@@ -51,6 +51,10 @@ def register
 end
 ```
 
+## Usage
+
+Although the code is pretty lightweight and self-explanatory, [documentation](http://rdoc.info/github/bittersweet/metric/master/frames) is available via rdoc.info.
+
 ## Thanks
 
 [jeffkreeftmeijer](https://github.com/jeffkreeftmeijer) for providing me with the awesome domainname!
