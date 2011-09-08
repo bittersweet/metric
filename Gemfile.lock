@@ -10,7 +10,7 @@ GEM
   specs:
     addressable (2.2.6)
     archive-tar-minitar (0.5.2)
-    columnize (0.3.3)
+    columnize (0.3.4)
     crack (0.1.8)
     diff-lcs (1.1.2)
     faraday (0.7.4)
@@ -56,10 +56,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  faraday
   linecache19
   metric!
-  multi_json
   rspec
   ruby-debug
   ruby-debug19
