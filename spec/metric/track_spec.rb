@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe Metric::Track do
-  before do
-    reset_config
-  end
-
   it "composes the request url" do
     Metric::Track.compose("hits").should == "http://api.metric.io/track?api_key=spec&metric=hits"
   end

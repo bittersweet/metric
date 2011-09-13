@@ -1,13 +1,6 @@
 require 'spec_helper'
 
 describe Metric::Receive do
-  before do
-    reset_config
-    Metric.configure do |config|
-      config.secret_key = "1234"
-    end
-  end
-
   it "generates correct hash via secret_token" do
     Metric::Receive.generate_token("hits").should == "c6daa87bcf8bf7cb4d1c74d872793e5e"
   end

@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Metric::Configuration do
+  after do
+    reset_config
+  end
+
   it "uses configuration defaults" do
     Metric.configure do |config|
       config.api_key = "test"

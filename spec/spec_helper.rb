@@ -6,6 +6,7 @@ def reset_config
   Metric.configuration = nil
   Metric.configure do |config|
     config.api_key = "spec"
+    config.secret_key = "1234"
   end
 end
 
