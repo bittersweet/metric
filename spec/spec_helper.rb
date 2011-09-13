@@ -10,3 +10,6 @@ def reset_config
   end
 end
 
+RSpec.configure do |config|
+  config.before(:all) { reset_config }
+end
