@@ -23,20 +23,25 @@ module Metric
       url
     end
 
-    # Uses a thread to perform the request
-    # @note If this gem is used with Rails it will only track data in the production environment
+    # Track the metric
+    # @note curl is called in a seperate thread so this won't block execution
     #
     # @param [String, Hash]
     # @return [nil]
     def self.track(metric, options = {})
-      return if defined?(Rails) && !Rails.env.production?
-      return if ENV['RACK_ENV'] && ENV['RACK_ENV'] != "production"
-      return if options[:amount] && options[:amount] == 0
-
+      return if quit_early?(options)
       url = compose(metric, options)
       Thread.new do
         `curl "#{url}" 2>&1 ; `
       end
+    end
+
+    # Check if Rails or Rack env is production, or amount is 0
+    def self.quit_early?(options)
+      return true if defined?(Rails) && !Rails.env.production?
+      return true if ENV['RACK_ENV'] && ENV['RACK_ENV'] != "production"
+      return true if options[:amount] && options[:amount] == 0
+      false
     end
 
     # CGI escape the metric name so spaces and characters are allowed
