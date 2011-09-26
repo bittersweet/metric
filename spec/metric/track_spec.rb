@@ -6,6 +6,7 @@ describe Metric::Track do
   end
 
   it "gets correct url when tracking" do
+    p ENV
     Metric::Track.should_receive(:compose).with("hits", {})
     Metric::Track.track("hits")
   end
