@@ -30,6 +30,7 @@ module Metric
     # @return [nil]
     def self.track(metric, options = {})
       return if defined?(Rails) && !Rails.env.production?
+      return if ENV['RACK_ENV'] && ENV['RACK_ENV'] != "production"
       return if options[:amount] && options[:amount] == 0
 
       url = compose(metric, options)
