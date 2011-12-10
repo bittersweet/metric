@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Metric::Track do
   it "composes the request url" do
-    Metric::Track.compose("hits").should == "http://api.metric.io/track?api_key=spec&metric=hits"
+    Metric::Track.compose("hits").should == "https://api.metric.io/track?api_key=spec&metric=hits"
   end
 
   it "gets correct url when tracking" do
@@ -16,12 +16,12 @@ describe Metric::Track do
   end
 
   it "sends trigger param" do
-    url = "http://api.metric.io/track?api_key=spec&metric=hits&trigger=1"
+    url = "https://api.metric.io/track?api_key=spec&metric=hits&trigger=1"
     Metric::Track.compose("hits", {:trigger => true}).should == url
   end
 
   it "sends custom amount" do
-    url = "http://api.metric.io/track?api_key=spec&metric=hits&amount=42"
+    url = "https://api.metric.io/track?api_key=spec&metric=hits&amount=42"
     Metric::Track.compose("hits", {:amount => 42}).should == url
   end
 

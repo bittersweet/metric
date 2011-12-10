@@ -16,7 +16,7 @@ module Metric
 
     # Sets defaults
     def initialize
-      @metric_host = "http://api.metric.io"
+      @metric_host = "https://api.metric.io"
     end
   end
 end

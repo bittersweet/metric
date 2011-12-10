@@ -9,14 +9,14 @@ describe Metric::Configuration do
     Metric.configure do |config|
       config.api_key = "test"
     end
-    Metric.configuration.metric_host.should == "http://api.metric.io"
+    Metric.configuration.metric_host.should == "https://api.metric.io"
   end
 
   it "configures metric host" do
     Metric.configure do |config|
-      config.metric_host = "http://localhost:5000"
+      config.metric_host = "https://localhost:5000"
     end
-    Metric.configuration.metric_host.should == "http://localhost:5000"
+    Metric.configuration.metric_host.should == "https://localhost:5000"
   end
 
   it "configures api_key" do
