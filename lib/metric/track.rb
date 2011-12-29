@@ -36,20 +36,22 @@ module Metric
       end
     end
 
-    # Check if Rails or Rack env is production, or amount is 0
-    def self.quit_early?(options)
-      return true if defined?(Rails) && !Rails.env.production?
-      return true if ENV['RACK_ENV'] && ENV['RACK_ENV'] != "production"
-      return true if options[:amount] && options[:amount] == 0
-      false
-    end
-
     # CGI escape the metric name so spaces and characters are allowed
     #
     # @param [String]
     # @return [String]
     def self.parse_metric(metric)
       "&metric=#{CGI.escape(metric)}"
+    end
+
+    private
+
+    # Check if Rails or Rack env is production, or amount is 0
+    def self.quit_early?(options)
+      return true if defined?(Rails) && !Rails.env.production?
+      return true if ENV['RACK_ENV'] && ENV['RACK_ENV'] != "production"
+      return true if options[:amount] && options[:amount] == 0
+      false
     end
   end
 end
