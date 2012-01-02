@@ -13,12 +13,14 @@ module Metric
     def self.compose(metric, options = {})
       amount = options[:amount]
       trigger = options[:trigger]
+      date = options[:date]
 
       key = "?api_key=" + Metric.configuration.api_key
       url = Metric.configuration.metric_host + '/track'
       url << key
       url << parse_metric(metric)
       url << "&amount=#{amount}" if amount
+      url << "&date=#{date}" if date
       url << "&trigger=1" if trigger
       url
     end

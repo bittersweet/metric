@@ -28,6 +28,11 @@ describe Metric::Track do
   it "does nothing if amount is 0" do
     Metric::Track.track("hits", {:amount => 0}).should == nil
   end
+
+  it "passes in custom date" do
+    url = "https://api.metric.io/track?api_key=spec&metric=hits&date=20120101"
+    Metric::Track.compose("hits", {:date => "20120101"}).should == url
+  end
 end
 
 
