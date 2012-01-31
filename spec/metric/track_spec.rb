@@ -11,8 +11,8 @@ describe Metric::Track do
     Metric::Track.track("hits")
   end
 
-  it "encodes the request url" do
-    Metric::Track.parse_metric("hits and spaces").should == "&metric=hits+and+spaces"
+  it "encodes the input" do
+    Metric::Track.escape("hits and spaces").should == "hits+and+spaces"
   end
 
   it "sends trigger param" do
@@ -26,13 +26,23 @@ describe Metric::Track do
   end
 
   it "does nothing if amount is 0" do
-    Metric::Track.track("hits", {:amount => 0}).should == nil
+    Metric::Track.should_not_receive(:compose)
+    Metric::Track.track("hits", {:amount => 0})
   end
 
   it "passes in custom date" do
     url = "https://api.metric.io/track?api_key=spec&metric=hits&date=20120101"
     Metric::Track.compose("hits", {:date => "20120101"}).should == url
   end
-end
 
+  it "passes in meta information" do
+    url = "https://api.metric.io/track?api_key=spec&metric=payment&meta=userid%3A+1"
+    Metric::Track.compose("payment", {:meta => "userid: 1"}).should == url
+  end
+
+  it "sends trigger param" do
+    url = "https://api.metric.io/track?api_key=spec&metric=hits&trigger=1"
+    Metric::Track.compose("hits", {:trigger => true}).should == url
+  end
+end
 

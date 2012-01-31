@@ -8,20 +8,23 @@ module Metric
     # @param [String] metric Metric identifier
     # @param [Hash] options Options
     # @option options [Symbol] :amount Amount to track
-    # @option options [Symbol] :trigger Flag for email notification
     # @option options [Symbol] :date Override the default date (today)
+    # @option options [Symbol] :meta Pass in custom meta data about the metric
+    # @option options [Symbol] :trigger Flag for email notification
     # @return [String]
     def self.compose(metric, options = {})
       amount = options[:amount]
       trigger = options[:trigger]
       date = options[:date]
+      meta = options[:meta]
 
       key = "?api_key=" + Metric.configuration.api_key
       url = Metric.configuration.metric_host + '/track'
       url << key
-      url << parse_metric(metric)
+      url << "&metric=#{escape(metric)}"
       url << "&amount=#{amount}" if amount
       url << "&date=#{date}" if date
+      url << "&meta=#{escape(meta)}" if meta
       url << "&trigger=1" if trigger
       url
     end
@@ -39,12 +42,12 @@ module Metric
       end
     end
 
-    # CGI escape the metric name so spaces and characters are allowed
+    # CGI escape the input
     #
     # @param [String]
     # @return [String]
-    def self.parse_metric(metric)
-      "&metric=#{CGI.escape(metric)}"
+    def self.escape(input)
+      CGI.escape(input)
     end
 
     private
