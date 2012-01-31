@@ -9,6 +9,7 @@ module Metric
     # @param [Hash] options Options
     # @option options [Symbol] :amount Amount to track
     # @option options [Symbol] :trigger Flag for email notification
+    # @option options [Symbol] :date Override the default date (today)
     # @return [String]
     def self.compose(metric, options = {})
       amount = options[:amount]
