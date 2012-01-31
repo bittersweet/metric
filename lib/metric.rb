@@ -18,16 +18,18 @@ module Metric
 
     # Tracks metrics
     #
-    # @param [String, Hash]
-    # @return [nil]
+    # @param [String] metric Metric identifier
+    # @param [Hash] options Options
+    # @return [Hash] API Response
     def track(metric, options = {})
       Metric::Track.track(metric, options)
     end
 
     # Fetches data from the API
     #
-    # @param [String, String]
-    # @return [Hash]
+    # @param [String] metric Metric identifier
+    # @param [String] range Range identifier, either total, today, week or month
+    # @return [Hash] API Response
     def receive(metric, range)
       Metric::Receive.receive(metric, range)
     end
