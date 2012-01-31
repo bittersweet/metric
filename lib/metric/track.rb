@@ -21,10 +21,10 @@ module Metric
       key = "?api_key=" + Metric.configuration.api_key
       url = Metric.configuration.metric_host + '/track'
       url << key
-      url << "&metric=#{escape(metric)}"
+      url << "&metric=#{CGI.escape(metric)}"
       url << "&amount=#{amount}" if amount
       url << "&date=#{date}" if date
-      url << "&meta=#{escape(meta)}" if meta
+      url << "&meta=#{CGI.escape(meta)}" if meta
       url << "&trigger=1" if trigger
       url
     end
@@ -40,14 +40,6 @@ module Metric
       Thread.new do
         `curl "#{url}" 2>&1 ; `
       end
-    end
-
-    # CGI escape the input
-    #
-    # @param [String]
-    # @return [String]
-    def self.escape(input)
-      CGI.escape(input)
     end
 
     private

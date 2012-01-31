@@ -12,12 +12,8 @@ describe Metric::Track do
   end
 
   it "encodes the input" do
-    Metric::Track.escape("hits and spaces").should == "hits+and+spaces"
-  end
-
-  it "sends trigger param" do
-    url = "https://api.metric.io/track?api_key=spec&metric=hits&trigger=1"
-    Metric::Track.compose("hits", {:trigger => true}).should == url
+    url = "https://api.metric.io/track?api_key=spec&metric=hits+and+spaces"
+    Metric::Track.compose("hits and spaces").should == url
   end
 
   it "sends custom amount" do
