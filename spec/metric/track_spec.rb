@@ -18,27 +18,27 @@ describe Metric::Track do
 
   it "sends custom amount" do
     url = "https://api.metric.io/track?api_key=spec&metric=hits&amount=42"
-    Metric::Track.compose("hits", {:amount => 42}).should == url
+    Metric::Track.compose("hits", :amount => 42).should == url
   end
 
   it "does nothing if amount is 0" do
     Metric::Track.should_not_receive(:compose)
-    Metric::Track.track("hits", {:amount => 0})
+    Metric::Track.track("hits", :amount => 0)
   end
 
   it "passes in custom date" do
     url = "https://api.metric.io/track?api_key=spec&metric=hits&date=20120101"
-    Metric::Track.compose("hits", {:date => "20120101"}).should == url
+    Metric::Track.compose("hits", :date => "20120101").should == url
   end
 
   it "passes in meta information" do
     url = "https://api.metric.io/track?api_key=spec&metric=payment&meta=userid%3A+1"
-    Metric::Track.compose("payment", {:meta => "userid: 1"}).should == url
+    Metric::Track.compose("payment", :meta => "userid: 1").should == url
   end
 
   it "sends trigger param" do
     url = "https://api.metric.io/track?api_key=spec&metric=hits&trigger=1"
-    Metric::Track.compose("hits", {:trigger => true}).should == url
+    Metric::Track.compose("hits", :trigger => true).should == url
   end
 end
 
