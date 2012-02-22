@@ -15,6 +15,7 @@ And create the following initializer:
 ``` ruby
 Metric.configure do |config|
   config.api_key = "YOUR_API_KEY"
+  config.secret_key = "YOUR_SECRET_KEY"
 end
 ```
 
@@ -28,33 +29,36 @@ You can track whatever metric you want, it will automatically show up in your
 dashboard.
 
 ``` ruby
-def show
-  @article = Article.find(params[:id])
-  Metric.track("article_view")
-end
+Metric.track("article_view")
 ```
 
 You can also add a custom amount to log multiple metrics in one go:
 
 ``` ruby
-def notify(users)
-  # send mails to everyone involved
-  Metric.track("email_notifications", {:amount => users.count})
-end
+Metric.track("email_notifications", {:amount => 301})
 ```
 
-To receive emails whenever a metric gets tracked pass in `trigger => true`
+If you want to push old statistics into metric.io you can use the date
+parameter:
 
 ``` ruby
-def register
-  Metric.track("user_signup", {:trigger => true})
-end
+Metric.track("signup", {:date => "20120101"})
+```
+
+To give the live event view in your dashboard some more context you can pass in
+meta information:
+
+``` ruby
+Metric.track("email", {:meta => "user 1021"})
 ```
 
 ## Documentation
 
-Although the code is pretty lightweight and self-explanatory, [documentation](http://rdoc.info/github/bittersweet/metric/master/frames) is available via rdoc.info.
+Although the code is pretty lightweight and self-explanatory,
+[documentation](http://rdoc.info/github/bittersweet/metric/master/frames)
+is available via rdoc.info.
 
 ## Thanks
 
-[jeffkreeftmeijer](https://github.com/jeffkreeftmeijer) for providing me with the awesome domainname!
+[jeffkreeftmeijer](https://github.com/jeffkreeftmeijer) for providing me with
+the awesome domainname!
