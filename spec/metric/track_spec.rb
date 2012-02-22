@@ -11,6 +11,13 @@ describe Metric::Track do
     Metric::Track.track("hits")
   end
 
+  it "uses http when ssl is false" do
+    Metric.configure do |config|
+      config.ssl = false
+    end
+    Metric::Track.compose("hits").should == "http://api.metric.io/track?api_key=spec&metric=hits"
+  end
+
   it "encodes the input" do
     url = "https://api.metric.io/track?api_key=spec&metric=hits+and+spaces"
     Metric::Track.compose("hits and spaces").should == url

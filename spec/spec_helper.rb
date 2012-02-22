@@ -10,5 +10,5 @@ def reset_config
 end
 
 RSpec.configure do |config|
-  config.before(:all) { reset_config }
+  config.before(:each) { reset_config }
 end

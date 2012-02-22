@@ -22,7 +22,7 @@ module Metric
     # @return [String]
     def self.compose(metric, range)
       key = "?api_key=" + Metric.configuration.api_key
-      url = Metric.configuration.metric_host + '/receive'
+      url = Metric.configuration.protocol + "://" + Metric.configuration.metric_host + '/receive'
       url << key
       url << "&token=" + generate_token(metric)
       url << parse_metric(metric)

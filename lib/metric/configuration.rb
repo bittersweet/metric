@@ -14,9 +14,18 @@ module Metric
     # Used to generate a hash for getting data out
     attr_accessor :secret_key
 
+    # Setting SSL on or off
+    attr_accessor :ssl
+
     # Sets defaults
     def initialize
-      @metric_host = "https://api.metric.io"
+      @metric_host = "api.metric.io"
+      @ssl = true
+    end
+
+    # Protocol to use
+    def protocol
+      @ssl ? "https" : "http"
     end
   end
 end

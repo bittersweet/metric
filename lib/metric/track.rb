@@ -19,7 +19,7 @@ module Metric
       meta = options[:meta]
 
       key = "?api_key=" + Metric.configuration.api_key
-      url = Metric.configuration.metric_host + '/track'
+      url = Metric.configuration.protocol + "://" + Metric.configuration.metric_host + '/track'
       url << key
       url << "&metric=#{CGI.escape(metric)}"
       url << "&amount=#{amount}" if amount

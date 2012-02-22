@@ -1,22 +1,18 @@
 require 'spec_helper'
 
 describe Metric::Configuration do
-  after do
-    reset_config
-  end
-
   it "uses configuration defaults" do
     Metric.configure do |config|
       config.api_key = "test"
     end
-    Metric.configuration.metric_host.should == "https://api.metric.io"
+    Metric.configuration.metric_host.should == "api.metric.io"
   end
 
   it "configures metric host" do
     Metric.configure do |config|
-      config.metric_host = "https://localhost:5000"
+      config.metric_host = "localhost:5000"
     end
-    Metric.configuration.metric_host.should == "https://localhost:5000"
+    Metric.configuration.metric_host.should == "localhost:5000"
   end
 
   it "configures api_key" do
@@ -31,5 +27,12 @@ describe Metric::Configuration do
       config.secret_key = "random_string"
     end
     Metric.configuration.secret_key.should == "random_string"
+  end
+
+  it "configures ssl" do
+    Metric.configure do |config|
+      config.ssl = false
+    end
+    Metric.configuration.ssl.should == false
   end
 end
