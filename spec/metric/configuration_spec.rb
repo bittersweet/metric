@@ -5,14 +5,14 @@ describe Metric::Configuration do
     Metric.configure do |config|
       config.api_key = "test"
     end
-    Metric.configuration.metric_host.should == "api.metric.io"
+    Metric.configuration.host.should == "api.metric.io"
   end
 
   it "configures metric host" do
     Metric.configure do |config|
-      config.metric_host = "localhost:5000"
+      config.host = "localhost:5000"
     end
-    Metric.configuration.metric_host.should == "localhost:5000"
+    Metric.configuration.host.should == "localhost:5000"
   end
 
   it "configures api_key" do
