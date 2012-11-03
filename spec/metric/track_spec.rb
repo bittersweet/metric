@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Metric::Track do
   it "composes the request url" do
-    Metric::Track.compose("hits").should == "https://api.metric.io/track?api_key=spec&metric=hits"
+    Metric::Track.compose("hits").should == "https://api.metric.io/v1/sites/spec/track?metric=hits"
   end
 
   it "gets correct url when tracking" do
@@ -15,17 +15,17 @@ describe Metric::Track do
     Metric.configure do |config|
       config.ssl = false
     end
-    Metric::Track.compose("hits").should == "http://api.metric.io/track?api_key=spec&metric=hits"
+    Metric::Track.compose("hits").should == "http://api.metric.io/v1/sites/spec/track?metric=hits"
   end
 
   it "encodes the input" do
-    url = "https://api.metric.io/track?api_key=spec&metric=hits+and+spaces"
-    Metric::Track.compose("hits and spaces").should == url
+    result = "https://api.metric.io/v1/sites/spec/track?metric=hits+and+spaces"
+    Metric::Track.compose("hits and spaces").should == result
   end
 
   it "sends custom amount" do
-    url = "https://api.metric.io/track?api_key=spec&metric=hits&amount=42"
-    Metric::Track.compose("hits", :amount => 42).should == url
+    result = "https://api.metric.io/v1/sites/spec/track?metric=hits&amount=42"
+    Metric::Track.compose("hits", :amount => 42).should == result
   end
 
   it "does nothing if amount is 0" do
@@ -34,18 +34,18 @@ describe Metric::Track do
   end
 
   it "passes in custom date" do
-    url = "https://api.metric.io/track?api_key=spec&metric=hits&date=20120101"
-    Metric::Track.compose("hits", :date => "20120101").should == url
+    result = "https://api.metric.io/v1/sites/spec/track?metric=hits&date=20120101"
+    Metric::Track.compose("hits", :date => "20120101").should == result
   end
 
   it "passes in meta information" do
-    url = "https://api.metric.io/track?api_key=spec&metric=payment&meta=userid%3A+1"
-    Metric::Track.compose("payment", :meta => "userid: 1").should == url
+    result = "https://api.metric.io/v1/sites/spec/track?metric=payment&meta=userid%3A+1"
+    Metric::Track.compose("payment", :meta => "userid: 1").should == result
   end
 
   it "sends trigger param" do
-    url = "https://api.metric.io/track?api_key=spec&metric=hits&trigger=1"
-    Metric::Track.compose("hits", :trigger => true).should == url
+    result = "https://api.metric.io/v1/sites/spec/track?metric=hits&trigger=1"
+    Metric::Track.compose("hits", :trigger => true).should == result
   end
 end
 

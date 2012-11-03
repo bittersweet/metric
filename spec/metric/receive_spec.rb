@@ -7,28 +7,28 @@ describe Metric::Receive do
 
   context "generating correct url" do
     it "total" do
-      request = "https://api.metric.io/receive?api_key=spec&token=c6daa87bcf8bf7cb4d1c74d872793e5e&metric=hits&range=total"
-      Metric::Receive.compose("hits", "total").should == request
+      result = "https://api.metric.io/v1/sites/spec/statistics?metric=hits&range=total&token=c6daa87bcf8bf7cb4d1c74d872793e5e"
+      Metric::Receive.compose("hits", "total").should == result
     end
 
     it "today" do
-      request = "https://api.metric.io/receive?api_key=spec&token=c6daa87bcf8bf7cb4d1c74d872793e5e&metric=hits&range=today"
-      Metric::Receive.compose("hits", "today").should == request
+      result = "https://api.metric.io/v1/sites/spec/statistics?metric=hits&range=today&token=c6daa87bcf8bf7cb4d1c74d872793e5e"
+      Metric::Receive.compose("hits", "today").should == result
     end
 
     it "week" do
-      request = "https://api.metric.io/receive?api_key=spec&token=c6daa87bcf8bf7cb4d1c74d872793e5e&metric=hits&range=week"
-      Metric::Receive.compose("hits", "week").should == request
+      result = "https://api.metric.io/v1/sites/spec/statistics?metric=hits&range=week&token=c6daa87bcf8bf7cb4d1c74d872793e5e"
+      Metric::Receive.compose("hits", "week").should == result
     end
 
     it "month" do
-      request = "https://api.metric.io/receive?api_key=spec&token=c6daa87bcf8bf7cb4d1c74d872793e5e&metric=hits&range=month"
-      Metric::Receive.compose("hits", "month").should == request
+      result = "https://api.metric.io/v1/sites/spec/statistics?metric=hits&range=month&token=c6daa87bcf8bf7cb4d1c74d872793e5e"
+      Metric::Receive.compose("hits", "month").should == result
     end
   end
 
   it "grabs actual data" do
-    stub_request(:get, "https://api.metric.io/receive?api_key=spec&metric=hits&range=total&token=c6daa87bcf8bf7cb4d1c74d872793e5e").
+    stub_request(:get, "https://api.metric.io/v1/sites/spec/statistics?metric=hits&range=total&token=c6daa87bcf8bf7cb4d1c74d872793e5e").
       to_return(:status => 200, :body => "{\"total\":\"1\"}", :headers => {})
     Metric::Receive.receive("hits", "total").should == {"total" => "1"}
   end

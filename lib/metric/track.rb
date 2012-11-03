@@ -18,10 +18,10 @@ module Metric
       date = options[:date]
       meta = options[:meta]
 
-      key = "?api_key=" + Metric.configuration.api_key
-      url = Metric.configuration.protocol + "://" + Metric.configuration.host + '/track'
-      url << key
-      url << "&metric=#{CGI.escape(metric)}"
+      api_key = Metric.configuration.api_key
+      url = Metric.configuration.protocol + "://" + Metric.configuration.host
+      url << "/v1/sites/#{api_key}/track"
+      url << "?metric=#{CGI.escape(metric)}"
       url << "&amount=#{amount}" if amount
       url << "&date=#{date}" if date
       url << "&meta=#{CGI.escape(meta)}" if meta

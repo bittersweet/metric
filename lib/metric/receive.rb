@@ -21,12 +21,12 @@ module Metric
     # @param [String] range Range identifier, either total, today, week or month
     # @return [String]
     def self.compose(metric, range)
-      key = "?api_key=" + Metric.configuration.api_key
-      url = Metric.configuration.protocol + "://" + Metric.configuration.host + '/receive'
-      url << key
-      url << "&token=" + generate_token(metric)
+      api_key = Metric.configuration.api_key
+      url = Metric.configuration.protocol + "://" + Metric.configuration.host
+      url << "/v1/sites/#{api_key}/statistics"
       url << parse_metric(metric)
       url << "&range=" + range
+      url << "&token=" + generate_token(metric)
     end
 
     # Returns and memoizes a Faraday connection
@@ -54,7 +54,7 @@ module Metric
     # @param [String] metric Metric identifier
     # @return [String]
     def self.parse_metric(metric)
-      "&metric=#{CGI.escape(metric)}"
+      "?metric=#{CGI.escape(metric)}"
     end
   end
 end
