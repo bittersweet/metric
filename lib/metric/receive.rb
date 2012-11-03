@@ -46,7 +46,7 @@ module Metric
     def self.receive(metric, range)
       url = compose(metric, range)
       response = connection.get(url)
-      MultiJson.decode(response.body)
+      MultiJson.decode(response.body)[range]
     end
 
     # CGI escape the metric name so spaces and characters are allowed

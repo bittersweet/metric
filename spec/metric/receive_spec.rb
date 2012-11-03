@@ -30,7 +30,7 @@ describe Metric::Receive do
   it "grabs actual data" do
     stub_request(:get, "https://api.metric.io/v1/sites/spec/statistics?metric=hits&range=total&token=e66652e1c3e7fdda10d6fb97cb279622").
       to_return(:status => 200, :body => "{\"total\":\"1\"}", :headers => {})
-    Metric::Receive.receive("hits", "total").should == {"total" => "1"}
+    Metric::Receive.receive("hits", "total").should == {"1"}
   end
 end
 
