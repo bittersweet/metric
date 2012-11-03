@@ -11,8 +11,8 @@ module Metric
     #
     # @param [String] metric Metric identifier
     # @return [String]
-    def self.generate_token(metric)
-      Digest::MD5.hexdigest(Metric.configuration.secret_key + metric)
+    def self.generate_token(metric, range)
+      Digest::MD5.hexdigest(Metric.configuration.secret_key + metric + range)
     end
 
     # Generate the url with query strings
@@ -26,7 +26,7 @@ module Metric
       url << "/v1/sites/#{api_key}/statistics"
       url << parse_metric(metric)
       url << "&range=" + range
-      url << "&token=" + generate_token(metric)
+      url << "&token=" + generate_token(metric, range)
     end
 
     # Returns and memoizes a Faraday connection
