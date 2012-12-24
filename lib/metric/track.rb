@@ -15,9 +15,10 @@ module Metric
       amount = options[:amount]
       date = options[:date]
       meta = options[:meta]
+      customer = options[:customer]
 
       parameters = {"metric" => metric, "amount" => amount, "date" => date,
-                    "meta" => meta}
+                    "meta" => meta, "customer" => customer}
 
       api_key = Metric.configuration.api_key
       url = Metric.configuration.protocol + "://" + Metric.configuration.host
