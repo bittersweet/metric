@@ -2,6 +2,7 @@ require 'metric/configuration'
 require 'metric/util'
 require 'metric/track'
 require 'metric/receive'
+require 'metric/rails'
 require 'cgi'
 
 module Metric

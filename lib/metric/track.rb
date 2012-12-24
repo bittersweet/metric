@@ -44,7 +44,7 @@ module Metric
 
     # Check if Rails or Rack env is production, or amount is 0
     def self.quit_early?(options)
-      return true if defined?(Rails) && !Rails.env.production?
+      return true if defined?(::Rails) && !::Rails.env.production?
       return true if ENV['RACK_ENV'] && ENV['RACK_ENV'] != "production"
       return true if options[:amount] && options[:amount] == 0
       false
