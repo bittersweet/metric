@@ -19,7 +19,7 @@ describe Metric::Track do
   end
 
   it "encodes the input" do
-    result = "https://api.metric.io/v1/sites/spec/track?metric=hits+and+spaces"
+    result = "https://api.metric.io/v1/sites/spec/track?metric=hits%20and%20spaces"
     Metric::Track.compose("hits and spaces").should == result
   end
 
@@ -39,13 +39,8 @@ describe Metric::Track do
   end
 
   it "passes in meta information" do
-    result = "https://api.metric.io/v1/sites/spec/track?metric=payment&meta=userid%3A+1"
+    result = "https://api.metric.io/v1/sites/spec/track?metric=payment&meta=userid%3A%201"
     Metric::Track.compose("payment", :meta => "userid: 1").should == result
-  end
-
-  it "sends trigger param" do
-    result = "https://api.metric.io/v1/sites/spec/track?metric=hits&trigger=1"
-    Metric::Track.compose("hits", :trigger => true).should == result
   end
 end
 

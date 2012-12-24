@@ -10,22 +10,19 @@ module Metric
     # @option options [Symbol] :amount Amount to track
     # @option options [Symbol] :date Override the default date (today)
     # @option options [Symbol] :meta Pass in custom meta data about the metric
-    # @option options [Symbol] :trigger Flag for email notification
     # @return [String]
     def self.compose(metric, options = {})
       amount = options[:amount]
-      trigger = options[:trigger]
       date = options[:date]
       meta = options[:meta]
 
+      parameters = {"metric" => metric, "amount" => amount, "date" => date,
+                    "meta" => meta}
+
       api_key = Metric.configuration.api_key
       url = Metric.configuration.protocol + "://" + Metric.configuration.host
-      url << "/v1/sites/#{api_key}/track"
-      url << "?metric=#{CGI.escape(metric)}"
-      url << "&amount=#{amount}" if amount
-      url << "&date=#{date}" if date
-      url << "&meta=#{CGI.escape(meta)}" if meta
-      url << "&trigger=1" if trigger
+      url << "/v1/sites/#{api_key}/track?"
+      url << Metric::Util.build_query_string(parameters)
       url
     end
 

@@ -21,12 +21,13 @@ module Metric
     # @param [String] range Range identifier, either total, today, week or month
     # @return [String]
     def self.compose(metric, range)
+      token = generate_token(metric, range)
+      parameters = {"metric" => metric, "range" => range, "token" => token}
       api_key = Metric.configuration.api_key
       url = Metric.configuration.protocol + "://" + Metric.configuration.host
-      url << "/v1/sites/#{api_key}/statistics"
-      url << parse_metric(metric)
-      url << "&range=" + range
-      url << "&token=" + generate_token(metric, range)
+      url << "/v1/sites/#{api_key}/statistics?"
+      url << Metric::Util.build_query_string(parameters)
+      url
     end
 
     # Returns and memoizes a Faraday connection
@@ -47,14 +48,6 @@ module Metric
       url = compose(metric, range)
       response = connection.get(url)
       MultiJson.decode(response.body)[range]
-    end
-
-    # CGI escape the metric name so spaces and characters are allowed
-    #
-    # @param [String] metric Metric identifier
-    # @return [String]
-    def self.parse_metric(metric)
-      "?metric=#{CGI.escape(metric)}"
     end
   end
 end
