@@ -1,6 +1,11 @@
 module Metric
   module Rails
     module ControllerMethods
+      def track_metric(metric, options = {})
+        options[:customer] ||= metric_current_user
+        Metric.track(metric, options)
+      end
+
       def metric_current_user
         user = current_user
         return {} if current_user.nil?
